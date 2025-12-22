@@ -1,15 +1,35 @@
 import { useState } from 'react';
 
 const LandCalculator = () => {
+  const [selectedShape, setSelectedShape] = useState('irregular');
   const [measurements, setMeasurements] = useState({
     north: '',
     south: '',
     east: '',
-    west: ''
+    west: '',
+    base: '',
+    height: '',
+    radius: '',
+    sideA: '',
+    sideB: '',
+    sideC: '',
+    length: '',
+    width: '',
+    parallelSide1: '',
+    parallelSide2: ''
   });
   
   const [results, setResults] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const shapes = [
+    { id: 'irregular', name: 'Irregular Plot', icon: '▱', namebn: 'অনিয়মিত জমি' },
+    { id: 'rectangle', name: 'Rectangle', icon: '▭', namebn: 'আয়তক্ষেত্র' },
+    { id: 'square', name: 'Square', icon: '□', namebn: 'বর্গক্ষেত্র' },
+    { id: 'triangle', name: 'Triangle', icon: '△', namebn: 'ত্রিভুজ' },
+    { id: 'circle', name: 'Circle', icon: '○', namebn: 'বৃত্ত' },
+    { id: 'trapezoid', name: 'Trapezoid', icon: '⏢', namebn: 'ট্রাপিজিয়াম' }
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,27 +41,112 @@ const LandCalculator = () => {
     }
   };
 
+  const handleShapeChange = (shapeId) => {
+    setSelectedShape(shapeId);
+    setResults(null);
+    // Reset measurements when changing shape
+    setMeasurements({
+      north: '',
+      south: '',
+      east: '',
+      west: '',
+      base: '',
+      height: '',
+      radius: '',
+      sideA: '',
+      sideB: '',
+      sideC: '',
+      length: '',
+      width: '',
+      parallelSide1: '',
+      parallelSide2: ''
+    });
+  };
+
   const calculateArea = () => {
-    const { north, south, east, west } = measurements;
-    
-    if (!north || !south || !east || !west) {
-      alert('Please fill in all measurements');
-      return;
+    let totalSquareFeet = 0;
+    let formula = '';
+
+    switch (selectedShape) {
+      case 'irregular': {
+        const { north, south, east, west } = measurements;
+        if (!north || !south || !east || !west) {
+          alert('Please fill in all measurements / সকল মাপ পূরণ করুন');
+          return;
+        }
+        const avgNorthSouth = (parseFloat(north) + parseFloat(south)) / 2;
+        const avgEastWest = (parseFloat(east) + parseFloat(west)) / 2;
+        totalSquareFeet = avgNorthSouth * avgEastWest;
+        formula = '((N + S) / 2) × ((E + W) / 2)';
+        break;
+      }
+
+      case 'rectangle': {
+        const { length, width } = measurements;
+        if (!length || !width) {
+          alert('Please fill in length and width / দৈর্ঘ্য এবং প্রস্থ পূরণ করুন');
+          return;
+        }
+        totalSquareFeet = parseFloat(length) * parseFloat(width);
+        formula = 'Length × Width';
+        break;
+      }
+
+      case 'triangle': {
+        const { base, height } = measurements;
+        if (!base || !height) {
+          alert('Please fill in base and height / ভিত্তি এবং উচ্চতা পূরণ করুন');
+          return;
+        }
+        totalSquareFeet = (parseFloat(base) * parseFloat(height)) / 2;
+        formula = '(Base × Height) / 2';
+        break;
+      }
+
+      case 'circle': {
+        const { radius } = measurements;
+        if (!radius) {
+          alert('Please fill in radius / ব্যাসার্ধ পূরণ করুন');
+          return;
+        }
+        totalSquareFeet = Math.PI * Math.pow(parseFloat(radius), 2);
+        formula = 'π × Radius²';
+        break;
+      }
+
+      case 'square': {
+        const { length } = measurements;
+        if (!length) {
+          alert('Please fill in side length / বাহুর দৈর্ঘ্য পূরণ করুন');
+          return;
+        }
+        totalSquareFeet = Math.pow(parseFloat(length), 2);
+        formula = 'Side × Side';
+        break;
+      }
+
+      case 'trapezoid': {
+        const { parallelSide1, parallelSide2, height: trapHeight } = measurements;
+        if (!parallelSide1 || !parallelSide2 || !trapHeight) {
+          alert('Please fill in all measurements / সকল মাপ পূরণ করুন');
+          return;
+        }
+        totalSquareFeet = ((parseFloat(parallelSide1) + parseFloat(parallelSide2)) / 2) * parseFloat(trapHeight);
+        formula = '((Side1 + Side2) / 2) × Height';
+        break;
+      }
+
+      default:
+        return;
     }
 
-    const northValue = parseFloat(north);
-    const southValue = parseFloat(south);
-    const eastValue = parseFloat(east);
-    const westValue = parseFloat(west);
-
-    const avgNorthSouth = (northValue + southValue) / 2;
-    const avgEastWest = (eastValue + westValue) / 2;
-    const totalSquareFeet = avgNorthSouth * avgEastWest;
     const shotok = totalSquareFeet / 435.6;
 
     setResults({
       totalSquareFeet: totalSquareFeet.toFixed(2),
-      shotok: shotok.toFixed(2)
+      shotok: shotok.toFixed(2),
+      formula: formula,
+      shape: shapes.find(s => s.id === selectedShape).name
     });
   };
 
@@ -50,7 +155,17 @@ const LandCalculator = () => {
       north: '',
       south: '',
       east: '',
-      west: ''
+      west: '',
+      base: '',
+      height: '',
+      radius: '',
+      sideA: '',
+      sideB: '',
+      sideC: '',
+      length: '',
+      width: '',
+      parallelSide1: '',
+      parallelSide2: ''
     });
     setResults(null);
   };
@@ -134,7 +249,7 @@ const LandCalculator = () => {
               <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-cyan-300">About</h3>
             </div>
             <p className="text-sm text-blue-200/90 leading-relaxed">
-              This professional land area calculator uses the Average Method, a standard approach in South Asian land measurement systems for calculating irregular plot areas.
+              This professional land area calculator supports 6 different land shapes: Irregular Plot, Rectangle, Square, Triangle, Circle, and Trapezoid. Uses the Average Method for irregular plots and standard formulas for regular shapes.
             </p>
           </div>
 
@@ -145,11 +260,26 @@ const LandCalculator = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-green-300 to-emerald-300">Formula</h3>
+              <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-green-300 to-emerald-300">Formulas</h3>
             </div>
             <div className="space-y-3 text-sm text-green-200/90">
-              <div className="font-mono bg-black/30 p-4 rounded-xl text-center border border-white/10 text-base font-semibold">
-                ((N + S) / 2) × ((E + W) / 2)
+              <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                Irregular Plot: ((N + S) / 2) × ((E + W) / 2)
+              </div>
+              <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                Rectangle: Length × Width
+              </div>
+              <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                Square: Side × Side
+              </div>
+              <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                Triangle: (Base × Height) / 2
+              </div>
+              <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                Circle: π × Radius²
+              </div>
+              <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                Trapezoid: ((Side1 + Side2) / 2) × Height
               </div>
               <p className="text-xs text-center bg-linear-to-r from-yellow-200 to-orange-200 text-gray-900 px-3 py-2 rounded-lg font-semibold">
                 Conversion: 1 Shotok = 435.6 sq ft
@@ -167,6 +297,10 @@ const LandCalculator = () => {
               <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-300 to-pink-300">Features</h3>
             </div>
             <ul className="space-y-3 text-sm text-purple-200/90">
+              <li className="flex items-center space-x-3 bg-white/5 px-3 py-2 rounded-lg">
+                <span className="text-green-400 text-xl">✓</span>
+                <span className="font-medium">Multiple shape support</span>
+              </li>
               <li className="flex items-center space-x-3 bg-white/5 px-3 py-2 rounded-lg">
                 <span className="text-green-400 text-xl">✓</span>
                 <span className="font-medium">Accurate calculations</span>
@@ -204,7 +338,7 @@ const LandCalculator = () => {
                   <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-cyan-300">About</h3>
                 </div>
                 <p className="text-sm text-blue-200/90 leading-relaxed">
-                  This professional land area calculator uses the Average Method, a standard approach in South Asian land measurement systems for calculating irregular plot areas.
+                  This professional land area calculator supports 6 different land shapes: Irregular Plot, Rectangle, Square, Triangle, Circle, and Trapezoid. Uses the Average Method for irregular plots and standard formulas for regular shapes.
                 </p>
               </div>
 
@@ -215,11 +349,26 @@ const LandCalculator = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-green-300 to-emerald-300">Formula</h3>
+                  <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-green-300 to-emerald-300">Formulas</h3>
                 </div>
                 <div className="space-y-3 text-sm text-green-200/90">
-                  <div className="font-mono bg-black/30 p-4 rounded-xl text-center border border-white/10 text-base font-semibold">
-                    ((N + S) / 2) × ((E + W) / 2)
+                  <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                    Irregular Plot: ((N + S) / 2) × ((E + W) / 2)
+                  </div>
+                  <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                    Rectangle: Length × Width
+                  </div>
+                  <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                    Square: Side × Side
+                  </div>
+                  <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                    Triangle: (Base × Height) / 2
+                  </div>
+                  <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                    Circle: π × Radius²
+                  </div>
+                  <div className="font-mono bg-black/30 p-3 rounded-xl text-center border border-white/10 text-xs font-semibold">
+                    Trapezoid: ((Side1 + Side2) / 2) × Height
                   </div>
                   <p className="text-xs text-center bg-linear-to-r from-yellow-200 to-orange-200 text-gray-900 px-3 py-2 rounded-lg font-semibold">
                     Conversion: 1 Shotok = 435.6 sq ft
@@ -237,6 +386,10 @@ const LandCalculator = () => {
                   <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-300 to-pink-300">Features</h3>
                 </div>
                 <ul className="space-y-3 text-sm text-purple-200/90">
+                  <li className="flex items-center space-x-3 bg-white/5 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors">
+                    <span className="text-green-400 text-xl">✓</span>
+                    <span className="font-medium">Multiple shape support</span>
+                  </li>
                   <li className="flex items-center space-x-3 bg-white/5 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors">
                     <span className="text-green-400 text-xl">✓</span>
                     <span className="font-medium">Accurate calculations</span>
@@ -281,96 +434,347 @@ const LandCalculator = () => {
                 </div>
 
                 <div className="p-3 sm:p-8 bg-linear-to-br from-blue-50 via-white to-purple-50">
-                  {/* Compass Layout */}
-                  <div className="relative grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 mb-8">
-                    {/* North */}
-                    <div className="col-start-2">
-                      <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
-                        <span className="hidden sm:inline">North / </span>উত্তর
-                      </label>
-                      <div className="relative group">
-                        <input
-                          type="text"
-                          name="north"
-                          value={measurements.north}
-                          onChange={handleInputChange}
-                          placeholder="0.00"
-                          className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-blue-400 bg-white"
-                        />
-                        <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
-                      </div>
+                  {/* Shape Selector */}
+                  <div className="mb-8">
+                    <h3 className="text-center text-lg sm:text-xl font-bold text-gray-800 mb-4">
+                      Select Land Shape / জমির আকৃতি নির্বাচন করুন
+                    </h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
+                      {shapes.map((shape) => (
+                        <button
+                          key={shape.id}
+                          onClick={() => handleShapeChange(shape.id)}
+                          className={`group relative p-4 rounded-2xl border-3 transition-all duration-300 transform hover:scale-105 ${
+                            selectedShape === shape.id
+                              ? 'bg-linear-to-br from-cyan-500 to-blue-600 border-blue-600 shadow-2xl shadow-blue-500/50'
+                              : 'bg-white border-gray-300 hover:border-blue-400 shadow-lg hover:shadow-xl'
+                          }`}
+                        >
+                          <div className="text-center">
+                            <div className={`text-4xl mb-2 ${selectedShape === shape.id ? 'text-white' : 'text-blue-600'}`}>
+                              {shape.icon}
+                            </div>
+                            <p className={`text-xs sm:text-sm font-bold ${selectedShape === shape.id ? 'text-white' : 'text-gray-700'}`}>
+                              {shape.name}
+                            </p>
+                            <p className={`text-[10px] sm:text-xs ${selectedShape === shape.id ? 'text-blue-100' : 'text-gray-500'}`}>
+                              {shape.namebn}
+                            </p>
+                          </div>
+                          {selectedShape === shape.id && (
+                            <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                          )}
+                        </button>
+                      ))}
                     </div>
+                  </div>
 
-                    {/* West */}
-                    <div className="col-start-1 row-start-2 flex flex-col justify-center">
-                      <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
-                        <span className="hidden sm:inline">West / </span>পশ্চিম
-                      </label>
-                      <div className="relative group">
-                        <input
-                          type="text"
-                          name="west"
-                          value={measurements.west}
-                          onChange={handleInputChange}
-                          placeholder="0.00"
-                          className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-green-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:border-green-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-green-400 bg-white"
-                        />
-                        <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">ft</span>
-                      </div>
-                    </div>
-
-                    {/* Center Compass */}
-                    <div className="col-start-2 row-start-2 flex items-center justify-center">
-                      <div className="relative group">
-                        <div className="absolute inset-0 bg-linear-to-br from-cyan-400 to-purple-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity animate-pulse"></div>
-                        <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-linear-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-500/50 transform group-hover:scale-105 transition-all duration-300">
-                          <svg className="w-8 h-8 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                          </svg>
+                  {/* Dynamic Input Fields Based on Selected Shape */}
+                  <div className="mb-8">
+                    {selectedShape === 'irregular' && (
+                      <div className="relative grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
+                        {/* North */}
+                        <div className="col-start-2">
+                          <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
+                            <span className="hidden sm:inline">North / </span>উত্তর
+                          </label>
+                          <div className="relative group">
+                            <input
+                              type="text"
+                              name="north"
+                              value={measurements.north}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-blue-400 bg-white"
+                            />
+                            <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
+                          </div>
                         </div>
-                        {/* Enhanced Compass indicators */}
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-1 sm:w-1.5 h-5 sm:h-6 bg-linear-to-b from-blue-500 to-transparent rounded-full"></div>
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1 sm:w-1.5 h-5 sm:h-6 bg-linear-to-t from-green-500 to-transparent rounded-full"></div>
-                        <div className="absolute top-1/2 -translate-y-1/2 -left-3 w-5 sm:w-6 h-1 sm:h-1.5 bg-linear-to-r from-green-500 to-transparent rounded-full"></div>
-                        <div className="absolute top-1/2 -translate-y-1/2 -right-3 w-5 sm:w-6 h-1 sm:h-1.5 bg-linear-to-l from-purple-500 to-transparent rounded-full"></div>
-                      </div>
-                    </div>
 
-                    {/* East */}
-                    <div className="col-start-3 row-start-2 flex flex-col justify-center">
-                      <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
-                        <span className="hidden sm:inline">East / </span>পূর্ব
-                      </label>
-                      <div className="relative group">
-                        <input
-                          type="text"
-                          name="east"
-                          value={measurements.east}
-                          onChange={handleInputChange}
-                          placeholder="0.00"
-                          className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-purple-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-purple-400 bg-white"
-                        />
-                        <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">ft</span>
-                      </div>
-                    </div>
+                        {/* West */}
+                        <div className="col-start-1 row-start-2 flex flex-col justify-center">
+                          <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
+                            <span className="hidden sm:inline">West / </span>পশ্চিম
+                          </label>
+                          <div className="relative group">
+                            <input
+                              type="text"
+                              name="west"
+                              value={measurements.west}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-green-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:border-green-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-green-400 bg-white"
+                            />
+                            <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
 
-                    {/* South */}
-                    <div className="col-start-2 row-start-3">
-                      <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
-                        <span className="hidden sm:inline">South / </span>দক্ষিণ
-                      </label>
-                      <div className="relative group">
-                        <input
-                          type="text"
-                          name="south"
-                          value={measurements.south}
-                          onChange={handleInputChange}
-                          placeholder="0.00"
-                          className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-orange-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-orange-400 bg-white"
-                        />
-                        <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">ft</span>
+                        {/* Center Compass */}
+                        <div className="col-start-2 row-start-2 flex items-center justify-center">
+                          <div className="relative group">
+                            <div className="absolute inset-0 bg-linear-to-br from-cyan-400 to-purple-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity animate-pulse"></div>
+                            <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-linear-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-500/50 transform group-hover:scale-105 transition-all duration-300">
+                              <svg className="w-8 h-8 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                              </svg>
+                            </div>
+                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-1 sm:w-1.5 h-5 sm:h-6 bg-linear-to-b from-blue-500 to-transparent rounded-full"></div>
+                            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1 sm:w-1.5 h-5 sm:h-6 bg-linear-to-t from-green-500 to-transparent rounded-full"></div>
+                            <div className="absolute top-1/2 -translate-y-1/2 -left-3 w-5 sm:w-6 h-1 sm:h-1.5 bg-linear-to-r from-green-500 to-transparent rounded-full"></div>
+                            <div className="absolute top-1/2 -translate-y-1/2 -right-3 w-5 sm:w-6 h-1 sm:h-1.5 bg-linear-to-l from-purple-500 to-transparent rounded-full"></div>
+                          </div>
+                        </div>
+
+                        {/* East */}
+                        <div className="col-start-3 row-start-2 flex flex-col justify-center">
+                          <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
+                            <span className="hidden sm:inline">East / </span>পূর্ব
+                          </label>
+                          <div className="relative group">
+                            <input
+                              type="text"
+                              name="east"
+                              value={measurements.east}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-purple-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-purple-400 bg-white"
+                            />
+                            <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+
+                        {/* South */}
+                        <div className="col-start-2 row-start-3">
+                          <label className="block text-xs font-black text-gray-700 mb-2 text-center uppercase tracking-wider">
+                            <span className="hidden sm:inline">South / </span>দক্ষিণ
+                          </label>
+                          <div className="relative group">
+                            <input
+                              type="text"
+                              name="south"
+                              value={measurements.south}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-2 sm:px-4 py-2 sm:py-4 text-sm sm:text-lg border-3 border-orange-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-600 text-center font-bold transition-all shadow-lg hover:shadow-xl group-hover:border-orange-400 bg-white"
+                            />
+                            <span className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    )}
+
+                    {selectedShape === 'rectangle' && (
+                      <div className="max-w-md mx-auto space-y-4">
+                        <div className="flex items-center justify-center mb-6">
+                          <div className="text-8xl text-blue-600">▭</div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Length / দৈর্ঘ্য (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="length"
+                              value={measurements.length}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Width / প্রস্থ (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="width"
+                              value={measurements.width}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-green-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:border-green-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div className="bg-blue-50 p-4 rounded-xl border-2 border-blue-200">
+                          <p className="text-xs text-center text-gray-600 font-semibold">
+                            Formula: Length × Width
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedShape === 'triangle' && (
+                      <div className="max-w-md mx-auto space-y-4">
+                        <div className="flex items-center justify-center mb-6">
+                          <div className="text-8xl text-blue-600">△</div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Base / ভিত্তি (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="base"
+                              value={measurements.base}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Height / উচ্চতা (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="height"
+                              value={measurements.height}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-green-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:border-green-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div className="bg-blue-50 p-4 rounded-xl border-2 border-blue-200">
+                          <p className="text-xs text-center text-gray-600 font-semibold">
+                            Formula: (Base × Height) / 2
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedShape === 'circle' && (
+                      <div className="max-w-md mx-auto space-y-4">
+                        <div className="flex items-center justify-center mb-6">
+                          <div className="text-8xl text-blue-600">○</div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Radius / ব্যাসার্ধ (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="radius"
+                              value={measurements.radius}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div className="bg-blue-50 p-4 rounded-xl border-2 border-blue-200">
+                          <p className="text-xs text-center text-gray-600 font-semibold">
+                            Formula: π × Radius² (π ≈ 3.14159)
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedShape === 'square' && (
+                      <div className="max-w-md mx-auto space-y-4">
+                        <div className="flex items-center justify-center mb-6">
+                          <div className="text-8xl text-blue-600">□</div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Side Length / বাহুর দৈর্ঘ্য (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="length"
+                              value={measurements.length}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div className="bg-blue-50 p-4 rounded-xl border-2 border-blue-200">
+                          <p className="text-xs text-center text-gray-600 font-semibold">
+                            Formula: Side × Side
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedShape === 'trapezoid' && (
+                      <div className="max-w-md mx-auto space-y-4">
+                        <div className="flex items-center justify-center mb-6">
+                          <div className="text-8xl text-blue-600">⏢</div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Parallel Side 1 / সমান্তরাল বাহু ১ (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="parallelSide1"
+                              value={measurements.parallelSide1}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Parallel Side 2 / সমান্তরাল বাহু ২ (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="parallelSide2"
+                              value={measurements.parallelSide2}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-purple-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:border-purple-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
+                            Height / উচ্চতা (feet)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="height"
+                              value={measurements.height}
+                              onChange={handleInputChange}
+                              placeholder="0.00"
+                              className="w-full px-4 py-4 text-lg border-3 border-green-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:border-green-600 text-center font-bold transition-all shadow-lg hover:shadow-xl bg-white"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">ft</span>
+                          </div>
+                        </div>
+                        <div className="bg-blue-50 p-4 rounded-xl border-2 border-blue-200">
+                          <p className="text-xs text-center text-gray-600 font-semibold">
+                            Formula: ((Side1 + Side2) / 2) × Height
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Action Buttons */}
@@ -443,6 +847,24 @@ const LandCalculator = () => {
                             {results.shotok}
                           </p>
                           <p className="text-xs sm:text-sm text-gray-600 font-bold relative z-10">Shotok / শতক</p>
+                        </div>
+                      </div>
+
+                      {/* Formula Display */}
+                      <div className="mt-6 pt-6 border-t-4 border-blue-300 relative z-10">
+                        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border-2 border-blue-200 shadow-lg">
+                          <div className="flex items-center justify-center space-x-2 mb-2">
+                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            <p className="text-sm font-bold text-gray-700">Shape Used / ব্যবহৃত আকৃতি:</p>
+                          </div>
+                          <p className="text-lg font-black text-blue-600 text-center mb-3">{results.shape}</p>
+                          <div className="bg-linear-to-r from-yellow-100 to-orange-100 rounded-lg p-3 border border-orange-300">
+                            <p className="text-xs sm:text-sm text-center text-gray-800 font-mono font-bold">
+                              Formula: {results.formula}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
