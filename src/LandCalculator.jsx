@@ -103,7 +103,7 @@ const HomePage = ({ navigateToPage }) => (
             <p className="text-xs sm:text-sm text-blue-200/90">Learn about our mission and features</p>
           </button>
 
-          {/* Smart Land Architect */}
+          {/* Smart Land Designer */}
           <button
             onClick={() => navigateToPage('smartArchitect')}
             className="bg-linear-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl p-4 sm:p-5 border border-white/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 text-left"
@@ -114,9 +114,9 @@ const HomePage = ({ navigateToPage }) => (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <h4 className="text-base sm:text-lg font-bold text-purple-300">Smart Architect</h4>
+              <h4 className="text-base sm:text-lg font-bold text-purple-300">Smart Land Designer</h4>
             </div>
-            <p className="text-xs sm:text-sm text-purple-200/90">AI-powered land planning</p>
+            <p className="text-xs sm:text-sm text-purple-200/90">Professional land planning system</p>
           </button>
 
           {/* Formula & Maths */}
@@ -522,8 +522,8 @@ const FormulaMathsPage = ({ goBack }) => (
   </div>
 );
 
-// Smart Land Architect Page Component with Form and Map
-const SmartLandArchitectPage = ({ goBack }) => {
+// Smart Land Designer Page Component with Form and Map
+const SmartLandDesignerPage = ({ goBack }) => {
   // Dummy data structure with multiple divisions
   const landData = {
     'Khulna': {
@@ -985,168 +985,303 @@ const SmartLandArchitectPage = ({ goBack }) => {
           <span>Back to Home</span>
         </button>
 
-        {/* Page Header */}
-        <div className="text-center mb-6 sm:mb-12 space-y-2 sm:space-y-4">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-linear-to-r from-emerald-300 via-green-300 to-teal-300">
-            Smart Land Architect
+        {/* Premium Page Header */}
+        <div className="text-center mb-8 sm:mb-12 space-y-3 sm:space-y-5 animate-fadeIn">
+          <div className="inline-block px-6 py-2 bg-linear-to-r from-emerald-500/20 via-green-500/20 to-teal-500/20 rounded-full border border-emerald-400/30 backdrop-blur-xl mb-4">
+            <span className="text-sm sm:text-base font-bold text-emerald-300">🎯 Advanced Land Planning System</span>
+          </div>
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-linear-to-r from-emerald-200 via-green-300 to-teal-300 drop-shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+            Smart Land Designer
           </h2>
-          <p className="text-xl sm:text-3xl text-emerald-300 font-bold">স্মার্ট ভূমি স্থপতি</p>
-          <p className="text-sm sm:text-lg text-green-200/80 max-w-2xl mx-auto px-2">
-            Find detailed land information across Bangladesh
+          <p className="text-2xl sm:text-4xl text-transparent bg-clip-text bg-linear-to-r from-emerald-300 to-teal-300 font-bold">স্মার্ট ভূমি পরিকল্পনা</p>
+          <p className="text-base sm:text-xl text-green-100/90 max-w-3xl mx-auto px-4 leading-relaxed">
+            Professional land information & planning across Bangladesh
           </p>
         </div>
 
-        {/* Main Form Card */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/20 shadow-2xl mb-6 sm:mb-8">
-          <div className="flex items-center space-x-3 mb-4 sm:mb-6">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg shrink-0">
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-              </svg>
+        {/* Premium Two-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          {/* Informative Banner/Sidebar */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Stats Card */}
+            <div className="bg-linear-to-br from-emerald-500/20 via-green-500/15 to-teal-500/20 backdrop-blur-2xl rounded-3xl p-6 border-2 border-emerald-400/30 shadow-[0_8px_32px_rgba(16,185,129,0.3)] hover:shadow-[0_12px_48px_rgba(16,185,129,0.4)] transition-all duration-500 hover:scale-[1.02]">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-black text-emerald-300">Coverage Stats</h3>
+              </div>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center p-3 bg-white/5 rounded-xl backdrop-blur-sm">
+                  <span className="text-sm font-semibold text-green-200">📍 Divisions</span>
+                  <span className="text-lg font-black text-emerald-300">8</span>
+                </div>
+                <div className="flex justify-between items-center p-3 bg-white/5 rounded-xl backdrop-blur-sm">
+                  <span className="text-sm font-semibold text-green-200">🏙️ Districts</span>
+                  <span className="text-lg font-black text-emerald-300">64+</span>
+                </div>
+                <div className="flex justify-between items-center p-3 bg-white/5 rounded-xl backdrop-blur-sm">
+                  <span className="text-sm font-semibold text-green-200">🗺️ Upazilas</span>
+                  <span className="text-lg font-black text-emerald-300">500+</span>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-emerald-300">Land Information Search</h3>
+
+            {/* Features Card */}
+            <div className="bg-linear-to-br from-teal-500/20 via-emerald-500/15 to-green-500/20 backdrop-blur-2xl rounded-3xl p-6 border-2 border-teal-400/30 shadow-[0_8px_32px_rgba(20,184,166,0.3)]">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-linear-to-br from-teal-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-black text-teal-300">Key Features</h3>
+              </div>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3 text-sm text-green-100">
+                  <span className="text-emerald-400 text-lg shrink-0">✓</span>
+                  <span>Comprehensive land records database</span>
+                </li>
+                <li className="flex items-start space-x-3 text-sm text-green-100">
+                  <span className="text-emerald-400 text-lg shrink-0">✓</span>
+                  <span>Interactive map visualization</span>
+                </li>
+                <li className="flex items-start space-x-3 text-sm text-green-100">
+                  <span className="text-emerald-400 text-lg shrink-0">✓</span>
+                  <span>Real-time data updates</span>
+                </li>
+                <li className="flex items-start space-x-3 text-sm text-green-100">
+                  <span className="text-emerald-400 text-lg shrink-0">✓</span>
+                  <span>DAG & satellite map views</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Help Card */}
+            <div className="bg-linear-to-br from-cyan-500/20 via-blue-500/15 to-teal-500/20 backdrop-blur-2xl rounded-3xl p-6 border-2 border-cyan-400/30 shadow-[0_8px_32px_rgba(6,182,212,0.3)]">
+              <div className="flex items-center space-x-3 mb-3">
+                <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-black text-cyan-300">How It Works</h3>
+              </div>
+              <p className="text-xs text-cyan-100/80 leading-relaxed">
+                Select your division, district, upazila, union, and land number to access detailed property information with interactive map visualization.
+              </p>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-            {/* Division */}
-            <div>
-              <label className="block text-sm sm:text-base font-semibold text-white mb-2">
-                Select Division (বিভাগ নির্বাচন করুন)
-              </label>
-              <select
-                value={selectedDivision}
-                onChange={handleDivisionChange}
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-emerald-400 transition-colors backdrop-blur-lg"
-                required
-              >
-                <option value="" className="bg-gray-900">Select Division / বিভাগ নির্বাচন করুন</option>
-                {Object.keys(landData).map(division => (
-                  <option key={division} value={division} className="bg-gray-900">
-                    {landData[division].name} / {landData[division].namebn}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* District */}
-            {selectedDivision && (
-              <div className="animate-slideIn">
-                <label className="block text-sm sm:text-base font-semibold text-white mb-2">
-                  Select District (জেলা নির্বাচন করুন)
-                </label>
-                <select
-                  value={selectedDistrict}
-                  onChange={handleDistrictChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-emerald-400 transition-colors backdrop-blur-lg"
-                  required
-                >
-                  <option value="" className="bg-gray-900">Select District / জেলা নির্বাচন করুন</option>
-                  {getDistricts().map(district => {
-                    const districtData = landData[selectedDivision].districts[district];
-                    return (
-                      <option key={district} value={district} className="bg-gray-900">
-                        {districtData.name} / {districtData.namebn}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            )}
-
-            {/* Upazila */}
-            {selectedDistrict && (
-              <div className="animate-slideIn">
-                <label className="block text-sm sm:text-base font-semibold text-white mb-2">
-                  Select Upazila (উপজেলা নির্বাচন করুন)
-                </label>
-                <select
-                  value={selectedUpazila}
-                  onChange={handleUpazilaChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-emerald-400 transition-colors backdrop-blur-lg"
-                  required
-                >
-                  <option value="" className="bg-gray-900">Select Upazila / উপজেলা নির্বাচন করুন</option>
-                  {getUpazilas().map(upazila => {
-                    const upazilaData = landData[selectedDivision].districts[selectedDistrict].upazilas[upazila];
-                    return (
-                      <option key={upazila} value={upazila} className="bg-gray-900">
-                        {upazilaData.name} / {upazilaData.namebn}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            )}
-
-            {/* Union */}
-            {selectedUpazila && (
-              <div className="animate-slideIn">
-                <label className="block text-sm sm:text-base font-semibold text-white mb-2">
-                  Select Union/Area (ইউনিয়ন/এলাকা নির্বাচন করুন)
-                </label>
-                <select
-                  value={selectedUnion}
-                  onChange={handleUnionChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-emerald-400 transition-colors backdrop-blur-lg"
-                  required
-                >
-                  <option value="" className="bg-gray-900">Select Union/Area / ইউনিয়ন/এলাকা নির্বাচন করুন</option>
-                  {getUnions().map(union => {
-                    const unionData = landData[selectedDivision].districts[selectedDistrict].upazilas[selectedUpazila].unions[union];
-                    return (
-                      <option key={union} value={union} className="bg-gray-900">
-                        {unionData.name} / {unionData.namebn}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            )}
-
-            {/* Land Number */}
-            {selectedUnion && (
-              <div className="animate-slideIn">
-                <label className="block text-sm sm:text-base font-semibold text-white mb-2">
-                  Select Land Number (জমির নম্বর নির্বাচন করুন)
-                </label>
-                <select
-                  value={selectedLandNumber}
-                  onChange={handleLandNumberChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/10 border border-white/20 rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-emerald-400 transition-colors backdrop-blur-lg"
-                  required
-                >
-                  <option value="" className="bg-gray-900">Select Land Number / জমির নম্বর নির্বাচন করুন</option>
-                  {getLandNumbers().map(landNum => (
-                    <option key={landNum} value={landNum} className="bg-gray-900">
-                      {landNum}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            {/* Submit Button */}
-            {selectedLandNumber && (
-              <div className="animate-slideIn">
-                <button
-                  type="submit"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-linear-to-r from-emerald-500 via-green-600 to-teal-600 text-white text-base sm:text-lg font-black rounded-xl shadow-2xl shadow-emerald-500/50 hover:shadow-emerald-400/70 transform hover:scale-105 transition-all duration-300"
-                >
-                  <div className="flex items-center justify-center space-x-2">
-                    <span>Get Land Information</span>
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          {/* Main Form Card */}
+          <div className="lg:col-span-2">
+            <div className="bg-linear-to-br from-white/10 via-white/5 to-transparent backdrop-blur-2xl rounded-3xl p-6 sm:p-10 border-2 border-white/30 shadow-[0_20px_60px_rgba(16,185,129,0.3)] hover:shadow-[0_25px_80px_rgba(16,185,129,0.4)] transition-all duration-500 relative overflow-hidden">
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center space-x-4 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-white/20">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-linear-to-br from-emerald-400 via-green-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-xl shadow-emerald-500/50 shrink-0 animate-pulse">
+                    <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
                   </div>
-                </button>
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-emerald-300 to-teal-300">Land Information Search</h3>
+                    <p className="text-sm sm:text-base text-green-200/70 mt-1">Find your property with precision</p>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-7">
+                  {/* Division */}
+                  <div className="group">
+                    <label className="flex items-center space-x-2 text-base sm:text-lg font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                      <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+                      <span>Select Division • বিভাগ নির্বাচন করুন</span>
+                    </label>
+                    <div className="relative">
+                      <select
+                        value={selectedDivision}
+                        onChange={handleDivisionChange}
+                        className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-linear-to-r from-white/5 to-white/10 border-2 border-white/30 rounded-2xl text-white text-sm sm:text-base font-medium focus:outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/20 transition-all duration-300 backdrop-blur-xl hover:border-emerald-300/50 cursor-pointer appearance-none"
+                        required
+                      >
+                        <option value="" className="bg-gray-900">Select Division / বিভাগ নির্বাচন করুন</option>
+                        {Object.keys(landData).map(division => (
+                          <option key={division} value={division} className="bg-gray-900">
+                            {landData[division].name} / {landData[division].namebn}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg className="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* District */}
+                  {selectedDivision && (
+                    <div className="animate-slideIn group">
+                      <label className="flex items-center space-x-2 text-base sm:text-lg font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span>Select District • জেলা নির্বাচন করুন</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={selectedDistrict}
+                          onChange={handleDistrictChange}
+                          className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-linear-to-r from-white/5 to-white/10 border-2 border-white/30 rounded-2xl text-white text-sm sm:text-base font-medium focus:outline-none focus:border-green-400 focus:ring-4 focus:ring-green-400/20 transition-all duration-300 backdrop-blur-xl hover:border-green-300/50 cursor-pointer appearance-none"
+                          required
+                        >
+                          <option value="" className="bg-gray-900">Select District / জেলা নির্বাচন করুন</option>
+                          {getDistricts().map(district => {
+                            const districtData = landData[selectedDivision].districts[district];
+                            return (
+                              <option key={district} value={district} className="bg-gray-900">
+                                {districtData.name} / {districtData.namebn}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Upazila */}
+                  {selectedDistrict && (
+                    <div className="animate-slideIn group">
+                      <label className="flex items-center space-x-2 text-base sm:text-lg font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                        <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></span>
+                        <span>Select Upazila • উপজেলা নির্বাচন করুন</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={selectedUpazila}
+                          onChange={handleUpazilaChange}
+                          className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-linear-to-r from-white/5 to-white/10 border-2 border-white/30 rounded-2xl text-white text-sm sm:text-base font-medium focus:outline-none focus:border-teal-400 focus:ring-4 focus:ring-teal-400/20 transition-all duration-300 backdrop-blur-xl hover:border-teal-300/50 cursor-pointer appearance-none"
+                          required
+                        >
+                          <option value="" className="bg-gray-900">Select Upazila / উপজেলা নির্বাচন করুন</option>
+                          {getUpazilas().map(upazila => {
+                            const upazilaData = landData[selectedDivision].districts[selectedDistrict].upazilas[upazila];
+                            return (
+                              <option key={upazila} value={upazila} className="bg-gray-900">
+                                {upazilaData.name} / {upazilaData.namebn}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Union */}
+                  {selectedUpazila && (
+                    <div className="animate-slideIn group">
+                      <label className="flex items-center space-x-2 text-base sm:text-lg font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                        <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
+                        <span>Select Union/Area • ইউনিয়ন/এলাকা নির্বাচন করুন</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={selectedUnion}
+                          onChange={handleUnionChange}
+                          className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-linear-to-r from-white/5 to-white/10 border-2 border-white/30 rounded-2xl text-white text-sm sm:text-base font-medium focus:outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20 transition-all duration-300 backdrop-blur-xl hover:border-cyan-300/50 cursor-pointer appearance-none"
+                          required
+                        >
+                          <option value="" className="bg-gray-900">Select Union/Area / ইউনিয়ন/এলাকা নির্বাচন করুন</option>
+                          {getUnions().map(union => {
+                            const unionData = landData[selectedDivision].districts[selectedDistrict].upazilas[selectedUpazila].unions[union];
+                            return (
+                              <option key={union} value={union} className="bg-gray-900">
+                                {unionData.name} / {unionData.namebn}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Land Number */}
+                  {selectedUnion && (
+                    <div className="animate-slideIn group">
+                      <label className="flex items-center space-x-2 text-base sm:text-lg font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                        <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
+                        <span>Select Land Number • জমির নম্বর নির্বাচন করুন</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={selectedLandNumber}
+                          onChange={handleLandNumberChange}
+                          className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-linear-to-r from-white/5 to-white/10 border-2 border-white/30 rounded-2xl text-white text-sm sm:text-base font-medium focus:outline-none focus:border-yellow-400 focus:ring-4 focus:ring-yellow-400/20 transition-all duration-300 backdrop-blur-xl hover:border-yellow-300/50 cursor-pointer appearance-none"
+                          required
+                        >
+                          <option value="" className="bg-gray-900">Select Land Number / জমির নম্বর নির্বাচন করুন</option>
+                          {getLandNumbers().map(landNum => (
+                            <option key={landNum} value={landNum} className="bg-gray-900">
+                              {landNum}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg className="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Premium Submit Button */}
+                  {selectedLandNumber && (
+                    <div className="animate-slideIn pt-4">
+                      <button
+                        type="submit"
+                        className="relative w-full px-6 sm:px-8 py-4 sm:py-5 bg-linear-to-r from-emerald-500 via-green-600 to-teal-600 text-white text-lg sm:text-xl font-black rounded-2xl shadow-[0_10px_40px_rgba(16,185,129,0.6)] hover:shadow-[0_15px_60px_rgba(16,185,129,0.8)] transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 overflow-hidden group"
+                      >
+                        <div className="absolute inset-0 bg-linear-to-r from-teal-600 via-emerald-600 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-center space-x-3">
+                          <svg className="w-6 h-6 sm:w-7 sm:h-7 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                          <span>🔍 Get Land Information</span>
+                          <svg className="w-6 h-6 sm:w-7 sm:h-7 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </div>
+                      </button>
+                    </div>
+                  )}
+                </form>
               </div>
-            )}
-          </form>
+            </div>
+          </div>
         </div>
 
         {/* Results Modal */}
         {showResults && landInfo && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fadeIn" style={{ paddingTop: '5rem' }}>
+          <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fadeIn" style={{ paddingTop: '5rem' }}>
             <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-3xl p-4 sm:p-6 border-2 border-emerald-400/50 shadow-2xl max-w-7xl w-full max-h-[calc(100vh-6rem)] overflow-y-auto my-4">
               {/* Modal Header */}
               <div className="flex items-center justify-between mb-4 sm:mb-6 sticky top-0 bg-gray-900/95 backdrop-blur-sm z-10 py-2 rounded-xl">
@@ -2154,7 +2289,7 @@ const LandCalculator = () => {
             </div>
           </button>
 
-          {/* Smart Land Architect Button */}
+          {/* Smart Land Designer Button */}
           <button
             onClick={() => navigateToPage('smartArchitect')}
             className="w-full text-left bg-linear-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-white/10 shadow-xl hover:shadow-2xl hover:border-purple-400/50 transition-all duration-300 hover:scale-105 transform"
@@ -2165,10 +2300,10 @@ const LandCalculator = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-300 to-pink-300">Smart Land Architect</h3>
+              <h3 className="text-base sm:text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-300 to-pink-300">Smart Land Designer</h3>
             </div>
             <p className="text-xs sm:text-sm text-purple-200/90 leading-relaxed mb-2">
-              AI-powered land planning & optimization.
+              Professional land planning & information system.
             </p>
             <div className="flex items-center space-x-1 sm:space-x-2 text-purple-400 font-semibold text-xs sm:text-sm">
               <span>Explore</span>
@@ -2246,7 +2381,7 @@ const LandCalculator = () => {
               href="https://www.daraz.com.bd/casio-scientific-calculator/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 mb-2 sm:mb-3 shadow-lg hover:shadow-blue-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+              className="block bg-linear-to-br from-blue-600 to-indigo-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 mb-2 sm:mb-3 shadow-lg hover:shadow-blue-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
             >
               <div className="flex items-start space-x-2 sm:space-x-3">
                 <div className="bg-white rounded-md sm:rounded-lg p-1.5 sm:p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2273,7 +2408,7 @@ const LandCalculator = () => {
               href="https://www.daraz.com.bd/geometry-set/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block bg-gradient-to-br from-emerald-600 to-green-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 mb-2 sm:mb-3 shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+              className="block bg-linear-to-br from-emerald-600 to-green-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 mb-2 sm:mb-3 shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
             >
               <div className="flex items-start space-x-2 sm:space-x-3">
                 <div className="bg-white rounded-md sm:rounded-lg p-1.5 sm:p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2300,7 +2435,7 @@ const LandCalculator = () => {
               href="https://www.daraz.com.bd/laser-distance-meter/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block bg-gradient-to-br from-orange-600 to-red-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 mb-2 sm:mb-3 shadow-lg hover:shadow-orange-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+              className="block bg-linear-to-br from-orange-600 to-red-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 mb-2 sm:mb-3 shadow-lg hover:shadow-orange-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
             >
               <div className="flex items-start space-x-2 sm:space-x-3">
                 <div className="bg-white rounded-md sm:rounded-lg p-1.5 sm:p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2327,7 +2462,7 @@ const LandCalculator = () => {
               href="https://www.daraz.com.bd/surveying-compass/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block bg-gradient-to-br from-purple-600 to-pink-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+              className="block bg-linear-to-br from-purple-600 to-pink-700 rounded-lg sm:rounded-xl p-2.5 sm:p-3 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
             >
               <div className="flex items-start space-x-2 sm:space-x-3">
                 <div className="bg-white rounded-md sm:rounded-lg p-1.5 sm:p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2362,7 +2497,7 @@ const LandCalculator = () => {
       {currentPage === 'home' && <HomePage navigateToPage={navigateToPage} />}
       {currentPage === 'shapeSelector' && <ShapeSelectorPage goBack={goBack} shapes={shapes} handleShapeChange={handleShapeChange} />}
       {currentPage === 'aboutUs' && <AboutUsPage goBack={goBack} />}
-      {currentPage === 'smartArchitect' && <SmartLandArchitectPage goBack={goBack} />}
+      {currentPage === 'smartArchitect' && <SmartLandDesignerPage goBack={goBack} />}
       {currentPage === 'formulaMaths' && <FormulaMathsPage goBack={goBack} />}
       
       {/* Calculator Page - Only show when currentPage === 'calculator' */}
@@ -2398,7 +2533,7 @@ const LandCalculator = () => {
                 </div>
               </button>
 
-              {/* Smart Land Architect Button */}
+              {/* Smart Land Designer Button */}
               <button
                 onClick={() => navigateToPage('smartArchitect')}
                 className="w-full text-left bg-linear-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-xl rounded-2xl p-5 border border-white/10 shadow-2xl hover:shadow-purple-500/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 transform"
@@ -2409,10 +2544,10 @@ const LandCalculator = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-300 to-pink-300">Smart Land Architect</h3>
+                  <h3 className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-purple-300 to-pink-300">Smart Land Designer</h3>
                 </div>
                 <p className="text-sm text-purple-200/90 leading-relaxed mb-3">
-                  AI-powered land planning & optimization.
+                  Professional land planning & information system.
                 </p>
                 <div className="flex items-center space-x-2 text-purple-400 font-semibold text-sm">
                   <span>Explore</span>
@@ -2478,7 +2613,7 @@ const LandCalculator = () => {
                   href="https://www.daraz.com.bd/casio-scientific-calculator/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl p-3 mb-3 shadow-lg hover:shadow-blue-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+                  className="block bg-linear-to-br from-blue-600 to-indigo-700 rounded-xl p-3 mb-3 shadow-lg hover:shadow-blue-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
                 >
                   <div className="flex items-start space-x-3">
                     <div className="bg-white rounded-lg p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2511,7 +2646,7 @@ const LandCalculator = () => {
                   href="https://www.daraz.com.bd/geometry-set/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block bg-gradient-to-br from-emerald-600 to-green-700 rounded-xl p-3 mb-3 shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+                  className="block bg-linear-to-br from-emerald-600 to-green-700 rounded-xl p-3 mb-3 shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
                 >
                   <div className="flex items-start space-x-3">
                     <div className="bg-white rounded-lg p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2544,7 +2679,7 @@ const LandCalculator = () => {
                   href="https://www.daraz.com.bd/laser-distance-meter/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block bg-gradient-to-br from-orange-600 to-red-700 rounded-xl p-3 mb-3 shadow-lg hover:shadow-orange-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+                  className="block bg-linear-to-br from-orange-600 to-red-700 rounded-xl p-3 mb-3 shadow-lg hover:shadow-orange-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
                 >
                   <div className="flex items-start space-x-3">
                     <div className="bg-white rounded-lg p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -2577,7 +2712,7 @@ const LandCalculator = () => {
                   href="https://www.daraz.com.bd/surveying-compass/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block bg-gradient-to-br from-purple-600 to-pink-700 rounded-xl p-3 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
+                  className="block bg-linear-to-br from-purple-600 to-pink-700 rounded-xl p-3 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group hover:scale-105 transform active:scale-95"
                 >
                   <div className="flex items-start space-x-3">
                     <div className="bg-white rounded-lg p-2 shrink-0 group-hover:scale-110 transition-transform duration-300">
